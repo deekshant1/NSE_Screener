@@ -15,25 +15,25 @@ Features:
 
 Usage:
     # Production Daemon (Recommended)
-    python nse_data_downloader2.py --daemon start          # Background service
-    python nse_data_downloader2.py --daemon stop           # Graceful shutdown
-    python nse_data_downloader2.py --daemon status         # Health check
+    python nse_data_downloader.py --daemon start          # Background service
+    python nse_data_downloader.py --daemon stop           # Graceful shutdown
+    python nse_data_downloader.py --daemon status         # Health check
 
     # One-Time Operations
-    python nse_data_downloader2.py --update-now            # Incremental update
-    python nse_data_downloader2.py --history-only          # Full history
-    python nse_data_downloader2.py --days 30               # Last N days
-    python nse_data_downloader2.py --fill-gaps             # Fix missing dates
-    python nse_data_downloader2.py --validate              # Data integrity check
-    python nse_data_downloader2.py --status                # Database status
+    python nse_data_downloader.py --update-now            # Incremental update
+    python nse_data_downloader.py --history-only          # Full history
+    python nse_data_downloader.py --days 30               # Last N days
+    python nse_data_downloader.py --fill-gaps             # Fix missing dates
+    python nse_data_downloader.py --validate              # Data integrity check
+    python nse_data_downloader.py --status                # Database status
 
     # Query Interface
-    python nse_data_downloader2.py --query "SELECT ..."    # Read-only queries
-    python nse_data_downloader2.py --export csv            # Export to CSV
+    python nse_data_downloader.py --query "SELECT ..."    # Read-only queries
+    python nse_data_downloader.py --export csv            # Export to CSV
 
     # Monitoring
-    python nse_data_downloader2.py --metrics               # Prometheus metrics
-    python nse_data_downloader2.py --health                # Health endpoint
+    python nse_data_downloader.py --metrics               # Prometheus metrics
+    python nse_data_downloader.py --health                # Health endpoint
 
 Author: Production-Ready NSE Downloader
 Version: 3.0.0
@@ -1465,7 +1465,7 @@ class NSEDownloader:
             # Disk full or permission errors
             if e.errno == 28 or 'No space left' in str(e):
                 logger.critical(f"💾 DISK FULL - Cannot save {result.date}")
-                logger.critical("Action: Free up space, then run: python nse_data_downloader2.py --fill-gaps")
+                logger.critical("Action: Free up space, then run: python nse_data_downloader.py --fill-gaps")
             else:
                 logger.error(f"OS error saving {result.date}: {e}")
 
@@ -1978,22 +1978,22 @@ def main():
         epilog="""
 Examples:
   # Start daemon
-  python nse_data_downloader2.py --daemon start
+  python nse_data_downloader.py --daemon start
 
   # One-time update
-  python nse_data_downloader2.py --update-now
+  python nse_data_downloader.py --update-now
 
   # Download last 30 days
-  python nse_data_downloader2.py --days 30
+  python nse_data_downloader.py --days 30
 
   # Check status
-  python nse_data_downloader2.py --status
+  python nse_data_downloader.py --status
 
   # Fill missing dates
-  python nse_data_downloader2.py --fill-gaps
+  python nse_data_downloader.py --fill-gaps
 
   # Validate data integrity
-  python nse_data_downloader2.py --validate
+  python nse_data_downloader.py --validate
         """
     )
 
